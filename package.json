@@ -1,0 +1,17 @@
+{
+  "name": "yt-donwloader",
+  "version": "1.0.0",
+  "description": "Simple Youtube downloader",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Ismael Fuentes Sintes",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^21.2.1"
+  },
+  "dependencies": {
+    "ytdl-core": "^4.11.2"
+  }
+}

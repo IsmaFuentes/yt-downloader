@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self';img-src *"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>YT Downloader</title>
+  </head>
+  <body>
+    <section id="main">
+      <div class="form-group-field">
+        <label for="url-selector" class="form-label">Place any YouTube url here.</label>
+        <div class="form-field-group">
+          <input type="text" class="form-field" id="url-selector" />
+          <button class="form-button" id="add-url-btn">+</button>
+        </div>
+      </div>
+      <section id="items"></section>
+    </section>
+    <footer>
+      <button id="download-btn">Download</button>
+    </footer>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
