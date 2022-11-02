@@ -12,7 +12,14 @@ window.addEventListener('DOMContentLoaded', () => {
 contextBridge.exposeInMainWorld('electron', {
   openDialog: (args) => ipcRenderer.invoke('open-dialog', args),
   fetchInfoFromUrl: (url) => ytdl.getInfo(url),
-  downloadFromInfo: (info, fileName, options) => {
-    ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
+  downloadFromInfo: async (info, fileName, options) => {
+    return new Promise((resolve, reject) => {
+      try {
+        ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
+        resolve();
+      } catch (err) {
+        reject(err);
+      }
+    });
   },
 });
