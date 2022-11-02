@@ -4,6 +4,7 @@ const path = require('path');
 /**
  * All of this was done following Electron's official guide:
  * https://www.electronjs.org/docs/latest/tutorial/quick-start
+ * https://stackoverflow.com/questions/45148110/how-to-add-a-callback-to-ipc-renderer-send
  */
 
 const createWindow = () => {
