@@ -1,13 +1,13 @@
-html {
-  min-height: 100vh;
-}
-
 /**
-MAIN COLORS
+  MAIN COLORS
   #222222 (primary)
   #464545 (background)
   #ECE6E6 (text)
 **/
+
+html {
+  min-height: 100vh;
+}
 
 body {
   display: flex;
@@ -26,7 +26,6 @@ body {
 
 #items {
   overflow: auto;
-  margin-top: 15px;
   height: 85%;
 }
 
@@ -50,6 +49,16 @@ body {
   width: 150px;
   padding: 5px;
   object-fit: contain;
+}
+
+.yt-item-remove-btn {
+  border-color: #f56a4f;
+  background: #f56a4f;
+  color: #ece6e6;
+  padding: 7px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .form-group-field {
@@ -96,8 +105,8 @@ body {
 #download-btn {
   cursor: pointer;
   width: 150px;
-  border: 2px solid #464545;
-  background: #464545;
+  border: 2px solid #72b951;
+  background: #72b951;
   outline: 0;
   color: #ece6e6;
   padding: 7px;
@@ -111,6 +120,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 ::-webkit-scrollbar {

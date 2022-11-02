@@ -1,5 +1,8 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
+try {
+  require('electron-reloader')(module);
+} catch {}
 
 /**
  * All of this was done following Electron's official guide:
