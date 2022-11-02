@@ -1,24 +1,12 @@
-const fs = require('fs');
-const ytdl = require('ytdl-core');
-
+const APP_CONTEXT = window.electron;
 const state = { items: [] };
 
 document.querySelector('#add-url-btn').addEventListener('click', (event) => {
   const selector = document.querySelector('#url-selector');
   const url = selector.value?.trim();
-  // todo: check for duped urls first
-  ytdl
-    .getInfo(url)
-    .then((info) => {
-      createEntry({
-        index: state.items.length,
-        videoInfo: info,
-        videoDetails: info.videoDetails,
-      });
-    })
-    .catch((err) => {
-      if (err) alert(err);
-    });
+  APP_CONTEXT.fetchInfoFromUrl(url).then((info) => {
+    createEntry(info);
+  });
 });
 
 const createEntry = (item) => {
@@ -27,7 +15,7 @@ const createEntry = (item) => {
   const element = document.createElement('div');
   element.innerHTML = `
   <div id="item-${item.index}" class="yt-item">
-    <image src="${videoDetails.thumbnails[0]?.url}" class="yt-item-thumb">
+    <img src="${videoDetails.thumbnails[0]?.url}" class="yt-item-thumb">
     <div>
         <span>${videoDetails.ownerChannelName} - ${videoDetails.category}</span>
         <p>${videoDetails.title}</p>
@@ -39,19 +27,13 @@ const createEntry = (item) => {
 };
 
 document.querySelector('#download-btn').addEventListener('click', (event) => {
-  //   dialog.showOpenDialog({ properties: ['openDirectory'] }).then((response) => {
-  //     const { canceled, filePaths } = response;
-  //     if (canceled) return;
-  //     console.log(filePaths);
-  //   });
-  //   electron.openDialog('showOpenDialog', {
-  //     title: 'Select a path',
-  //     properties: ['openDirectory'],
-  //   });
-
-  state.items?.forEach((item) => {
-    ytdl
-      .downloadFromInfo(item.videoInfo, { quality: 'highestaudio' })
-      .pipe(fs.createWriteStream('test.mp3'));
+  APP_CONTEXT.openDialog().then((openDialogResult) => {
+    const { canceled, filePaths } = openDialogResult;
+    if (canceled) return;
+    state.items?.forEach((item) => {
+      APP_CONTEXT.downloadFromInfo(item, `${filePaths[0]}\\${item.videoDetails.title}.mp3`, {
+        quality: 'highestaudio',
+      });
+    });
   });
 });

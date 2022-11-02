@@ -35,6 +35,7 @@ body {
 .yt-item-thumb {
   width: 150px;
   padding: 5px;
+  object-fit: contain;
 }
 
 .form__group {
