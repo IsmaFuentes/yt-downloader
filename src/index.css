@@ -24,7 +24,7 @@ body {
   overflow: hidden;
 }
 
-#items {
+#app-body {
   overflow: auto;
   height: 85%;
 }
@@ -107,8 +107,22 @@ body {
 }
 
 #download-btn {
+  margin: 0 5px 0 5px;
   cursor: pointer;
-  width: 150px;
+  width: 125px;
+  border: 2px solid #72b951;
+  background: #72b951;
+  outline: 0;
+  color: #ece6e6;
+  padding: 7px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+#clear-cache-btn {
+  margin: 0 5px 0 5px;
+  cursor: pointer;
+  width: 125px;
   border: 2px solid #72b951;
   background: #72b951;
   outline: 0;

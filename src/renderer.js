@@ -14,8 +14,9 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
     state.videos.push(item);
     const { videoDetails } = info;
     const element = document.createElement('div');
+    element.id = `item-${item.index}`;
+    element.className = 'yt-item';
     element.innerHTML = `
-    <div id="item-${item.index}" class="yt-item">
       <img src="${videoDetails.thumbnails[0]?.url}" class="yt-item-thumb">
       <div class="yt-item-description">
           <span>${videoDetails.ownerChannelName} - ${videoDetails.category}</span>
@@ -24,37 +25,44 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
       <button class="yt-item-remove-btn" id="btn-remove-${item.index}">
         <span class="material-icons-outlined">delete</span>
       </button>
-    </div>
     `;
-    document.querySelector('#items').appendChild(element);
-    registerDeleteAction(item);
+    document.querySelector('#app-body').appendChild(element);
+    document.querySelector(`#btn-remove-${item.index}`).addEventListener('click', (e) => {
+      document.querySelector(`#item-${item.index}`).remove();
+      state.videos.splice(item.index, 1);
+    });
     selector.value = '';
   });
 });
 
-const registerDeleteAction = (item) => {
-  document.querySelector(`#btn-remove-${item.index}`).addEventListener('click', (e) => {
-    document.querySelector(`#item-${item.index}`).remove();
-    state.videos.splice(item.index, 1);
-  });
-};
-
-document.querySelector('#download-btn').addEventListener('click', (event) => {
-  APP_CONTEXT.openDialog().then((openDialogResult) => {
-    const { canceled, filePaths } = openDialogResult;
-    if (!canceled) {
-      for (const item of state.videos) {
-        const title = formatVideoTitle(item.videoDetails.title);
-        APP_CONTEXT.downloadFromInfo(item, `${filePaths[0]}\\${title}.mp3`, {
-          quality: 'highestaudio',
-        }).then(() => {
-          console.log('download completed.');
-        });
-      }
-    }
-  });
+document.querySelector('#clear-cache-btn').addEventListener('click', (event) => {
+  localStorage.clear();
 });
 
-const formatVideoTitle = (title) => {
-  return title.replace(/(\||\,\s)/gi, '-');
+document.querySelector('#download-btn').addEventListener('click', (event) => {
+  let download_path = localStorage.getItem('download-path');
+  if (!download_path) {
+    APP_CONTEXT.openDialog({ title: 'Select a download folder' }).then((openDialogResult) => {
+      const { canceled, filePaths } = openDialogResult;
+      if (!canceled) {
+        download_path = filePaths[0];
+        localStorage.setItem('download-path', download_path);
+      }
+    });
+  }
+
+  downloadQueuedVideos(download_path);
+});
+
+const downloadQueuedVideos = (donwloadPath) => {
+  for (const item of state.videos) {
+    const title = item.videoDetails.title.replace(/(\||\,\s)/gi, '-');
+    APP_CONTEXT.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
+      quality: 'highestaudio',
+    }).then(() => {
+      console.log('download completed.');
+      document.querySelector(`#item-${item.index}`).remove();
+      state.videos.splice(item.index, 1);
+    });
+  }
 };

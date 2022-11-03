@@ -12,8 +12,10 @@ try {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 900,
+    height: 700,
+    resizable: false,
+    icon: path.join(__dirname, 'yt-downloader.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -22,8 +24,9 @@ const createWindow = () => {
   });
 
   win.loadFile('src/index.html');
-  ipcMain.handle('open-dialog', async (event, args) => {
-    const dialogResult = await dialog.showOpenDialog({ properties: ['openDirectory'] });
+  win.removeMenu();
+  ipcMain.handle('open-dialog', async (event, { title }) => {
+    const dialogResult = await dialog.showOpenDialog({ properties: ['openDirectory'], title });
     return dialogResult;
   });
 };
