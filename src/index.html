@@ -7,6 +7,7 @@
       content="default-src 'self'; script-src 'self';img-src *"
     />
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="material-icons/iconfont/material-icons.css" />
     <title>YT Downloader</title>
   </head>
   <body>
@@ -15,13 +16,17 @@
         <label for="url-selector" class="form-label">Place any YouTube url here.</label>
         <div class="form-field-group">
           <input type="text" class="form-field" id="url-selector" />
-          <button class="form-button" id="add-url-btn">+</button>
+          <button class="form-button" id="add-url-btn">
+            <span class="material-icons-outlined">add_box</span>
+          </button>
         </div>
       </div>
       <section id="items"></section>
     </section>
     <footer>
-      <button id="download-btn">Download</button>
+      <button id="download-btn">
+        <span class="material-icons-outlined">cloud_download</span>
+      </button>
     </footer>
     <script src="renderer.js"></script>
   </body>

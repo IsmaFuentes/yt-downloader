@@ -37,11 +37,12 @@ body {
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .yt-item-description {
   padding: 5px;
-  font-size: 20px;
+  font-size: 16px;
   width: 100%;
 }
 
@@ -52,13 +53,16 @@ body {
 }
 
 .yt-item-remove-btn {
-  border-color: #f56a4f;
+  cursor: pointer;
+  width: 50px;
+  margin: 10px;
+  border: 2px solid #f56a4f;
   background: #f56a4f;
+  outline: 0;
   color: #ece6e6;
-  padding: 7px;
+  padding: 5px;
   font-size: 18px;
   border-radius: 10px;
-  cursor: pointer;
 }
 
 .form-group-field {
