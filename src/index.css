@@ -106,6 +106,45 @@ body {
   font-size: 18px;
 }
 
+#form-notification-wrapper {
+  left: 0;
+  right: 0;
+  padding: 10px;
+  position: fixed;
+  bottom: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 1s, 0s;
+}
+
+.form-notification {
+  width: fit-content;
+  border: 1px solid white;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  color: #ece6e6;
+  cursor: default;
+}
+
+.form-notification.success {
+  border: 2px solid #72b951;
+  background: #72b951;
+}
+
+.form-notification.danger {
+  border: 2px solid #ec5e42;
+  background: #ec5e42;
+}
+
+.form-notification.warning {
+  border: 2px solid #ff9a47;
+  background: #ff9a47;
+}
+
 #download-btn {
   margin: 0 5px 0 5px;
   cursor: pointer;
