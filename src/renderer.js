@@ -37,7 +37,7 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
 
 document.querySelector('#clear-cache-btn').addEventListener('click', (event) => {
   localStorage.clear();
-  showNotification('Download folder removed', 'warning', 2000);
+  showNotification('Settings have been set to default.', 'warning', 2000);
 });
 
 document.querySelector('#download-btn').addEventListener('click', async (event) => {

@@ -5,10 +5,13 @@ try {
 } catch {}
 
 /**
- * All of this was done following Electron's official guide:
+ * Electron official guide:
  * https://www.electronjs.org/docs/latest/tutorial/quick-start
  * https://stackoverflow.com/questions/45148110/how-to-add-a-callback-to-ipc-renderer-send
  */
+
+// Force using discrete GPU when there are multiple GPUs available.
+// app.commandLine.appendSwitch('force_high_performance_gpu');
 
 const createWindow = () => {
   const win = new BrowserWindow({
