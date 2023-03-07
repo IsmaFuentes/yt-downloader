@@ -14,12 +14,9 @@ contextBridge.exposeInMainWorld('electron', {
   fetchInfoFromUrl: (url) => ytdl.getInfo(url),
   downloadFromInfo: async (info, fileName, options) => {
     return new Promise((resolve, reject) => {
-      try {
-        ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
-        resolve();
-      } catch (err) {
-        reject(err);
-      }
+      const stream = ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
+      stream.on('close', () => resolve());
+      stream.on('error', (e) => reject(e));
     });
   },
 });

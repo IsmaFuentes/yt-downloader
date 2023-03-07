@@ -57,20 +57,19 @@ document.querySelector('#download-btn').addEventListener('click', async (event) 
 const downloadQueuedVideos = async (donwloadPath) => {
   for (const item of state.videos) {
     const title = item.videoDetails.title.replace(/(\||\,\s)/gi, '-');
-    APP_CONTEXT.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
+    await APP_CONTEXT.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
       quality: 'highestaudio',
     })
       .then(() => {
         document.querySelector(`#item-${item.index}`).remove();
-        state.videos.splice(item.index, 1);
         showNotification('Download completed', 'success', 2000);
       })
       .catch((err) => {
-        if (err) {
-          showNotification(err.message, 'danger', 2000);
-        }
+        showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
       });
   }
+
+  state.videos = [];
 };
 
 const showNotification = (message, notificationType, delayMs) => {
