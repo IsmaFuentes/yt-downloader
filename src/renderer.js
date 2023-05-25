@@ -9,14 +9,15 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
     return;
   }
 
-  APP_CONTEXT.fetchInfoFromUrl(url).then((info) => {
-    const item = { ...info, index: state.videos.length, itemUrl: url };
-    state.videos.push(item);
-    const { videoDetails } = info;
-    const element = document.createElement('div');
-    element.id = `item-${item.index}`;
-    element.className = 'yt-item';
-    element.innerHTML = `
+  APP_CONTEXT.fetchInfoFromUrl(url)
+    .then((info) => {
+      const item = { ...info, index: state.videos.length, itemUrl: url };
+      state.videos.push(item);
+      const { videoDetails } = info;
+      const element = document.createElement('div');
+      element.id = `item-${item.index}`;
+      element.className = 'yt-item';
+      element.innerHTML = `
       <img src="${videoDetails.thumbnails[0]?.url}" class="yt-item-thumb">
       <div class="yt-item-description">
           <span>${videoDetails.ownerChannelName} - ${videoDetails.category}</span>
@@ -26,13 +27,16 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
         <span class="material-icons-outlined">delete</span>
       </button>
     `;
-    document.querySelector('#app-body').appendChild(element);
-    document.querySelector(`#btn-remove-${item.index}`).addEventListener('click', (e) => {
-      document.querySelector(`#item-${item.index}`).remove();
-      state.videos.splice(item.index, 1);
+      document.querySelector('#app-body').appendChild(element);
+      document.querySelector(`#btn-remove-${item.index}`).addEventListener('click', (e) => {
+        document.querySelector(`#item-${item.index}`).remove();
+        state.videos.splice(item.index, 1);
+      });
+      selector.value = '';
+    })
+    .catch((err) => {
+      showNotification(err.message ?? 'Unexpected error', 'warning', 2000);
     });
-    selector.value = '';
-  });
 });
 
 document.querySelector('#clear-cache-btn').addEventListener('click', (event) => {

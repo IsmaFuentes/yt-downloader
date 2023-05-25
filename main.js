@@ -23,11 +23,12 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: true,
+      devTools: true,
     },
   });
 
   win.loadFile('src/index.html');
-  win.removeMenu();
+  // win.removeMenu(); // if debug enable
   ipcMain.handle('open-dialog', async (event, { title }) => {
     const dialogResult = await dialog.showOpenDialog({ properties: ['openDirectory'], title });
     return dialogResult;
