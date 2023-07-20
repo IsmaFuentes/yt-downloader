@@ -1,4 +1,5 @@
 const APP_CONTEXT = window.electron;
+const { YouTubeDownloader, NativeMethods } = APP_CONTEXT;
 const state = { videos: [] };
 
 document.querySelector('#add-url-btn').addEventListener('click', (event) => {
@@ -9,7 +10,7 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
     return;
   }
 
-  APP_CONTEXT.fetchInfoFromUrl(url)
+  YouTubeDownloader.fetchInfoFromUrl(url)
     .then((info) => {
       const item = { ...info, index: state.videos.length, itemUrl: url };
       state.videos.push(item);
@@ -48,7 +49,7 @@ document.querySelector('#download-btn').addEventListener('click', async (event) 
   let download_path = localStorage.getItem('download-path');
   if (!download_path) {
     const options = { title: 'Select a download folder' };
-    const { canceled, filePaths } = await APP_CONTEXT.openDialog(options);
+    const { canceled, filePaths } = await NativeMethods.openDialog(options);
     if (!canceled) {
       download_path = filePaths[0];
       localStorage.setItem('download-path', download_path);
@@ -61,7 +62,7 @@ document.querySelector('#download-btn').addEventListener('click', async (event) 
 const downloadQueuedVideos = async (donwloadPath) => {
   for (const item of state.videos) {
     const title = item.videoDetails.title.replace(/(\||\,\s)/gi, '-');
-    await APP_CONTEXT.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
+    await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
       quality: 'highestaudio',
     })
       .then(() => {

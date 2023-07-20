@@ -1,7 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
-
-const fs = require('fs');
-const ytdl = require('ytdl-core');
+const { YouTubeDownloader } = require('./ytdl');
 
 window.addEventListener('DOMContentLoaded', () => {
   for (const dependency of ['chrome', 'node', 'electron']) {
@@ -10,13 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 contextBridge.exposeInMainWorld('electron', {
-  openDialog: (args) => ipcRenderer.invoke('open-dialog', args),
-  fetchInfoFromUrl: (url) => ytdl.getInfo(url),
-  downloadFromInfo: async (info, fileName, options) => {
-    return new Promise((resolve, reject) => {
-      const stream = ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
-      stream.on('close', () => resolve());
-      stream.on('error', (e) => reject(e));
-    });
+  YouTubeDownloader,
+  NativeMethods: {
+    openDialog: async (args) => ipcRenderer.invoke('open-dialog', args),
   },
 });
