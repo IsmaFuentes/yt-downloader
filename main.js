@@ -28,7 +28,11 @@ const createWindow = () => {
   });
 
   win.loadFile('src/index.html');
-  // win.removeMenu(); // if debug enable
+  // options menu with devtools
+  if (process.env.ENVIRONMENT !== 'dev') {
+    win.removeMenu();
+  }
+
   ipcMain.handle('open-dialog', async (event, { title }) => {
     const dialogResult = await dialog.showOpenDialog({ properties: ['openDirectory'], title });
     return dialogResult;

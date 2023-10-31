@@ -17,6 +17,9 @@ const YouTubeDownloader = {
    */
   downloadFromInfo: async (info, fileName, options = {}) => {
     return new Promise((resolve, reject) => {
+      if (process.env.ENVIRONMENT === 'dev') {
+        console.log(`downloading ${info.videoDetails.title}`);
+      }
       const stream = ytdl.downloadFromInfo(info, options).pipe(fs.createWriteStream(fileName));
       stream.on('close', () => resolve());
       stream.on('error', (e) => reject(e));

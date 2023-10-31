@@ -61,7 +61,7 @@ document.querySelector('#download-btn').addEventListener('click', async (event) 
 
 const downloadQueuedVideos = async (donwloadPath) => {
   for (const item of state.videos) {
-    const title = item.videoDetails.title.replace(/(\||\,\s)/gi, '-');
+    const title = stringFormat(item.videoDetails.title);
     await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
       quality: 'highestaudio',
     })
@@ -75,6 +75,11 @@ const downloadQueuedVideos = async (donwloadPath) => {
   }
 
   state.videos = [];
+};
+
+const stringFormat = (value) => {
+  const formattedString = value.replace(/(\:|\.)/gi, '').replace(/(\||\,\s)/gi, '-');
+  return formattedString;
 };
 
 const showNotification = (message, notificationType, delayMs) => {

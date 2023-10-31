@@ -4,12 +4,13 @@
   "description": "Simple Youtube downloader",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "start-dev": "set ENVIRONMENT=dev&& electron ."
   },
   "author": "Ismael Fuentes Sintes",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^21.2.1",
+    "electron": "^27.0.2",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
