@@ -15,9 +15,9 @@ try {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 900,
+    width: 820,
     height: 700,
-    resizable: false,
+    resizable: true,
     icon: path.join(__dirname, 'yt-downloader.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
