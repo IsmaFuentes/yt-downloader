@@ -60,25 +60,39 @@ document.querySelector('#download-btn').addEventListener('click', async (event) 
 });
 
 const downloadQueuedVideos = async (donwloadPath) => {
-  for (const item of state.videos) {
+  for (let i = 0; i <= state.videos.length; i++) {
+    const item = state.videos[0];
     const title = stringFormat(item.videoDetails.title);
     await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
       quality: 'highestaudio',
     })
       .then(() => {
         document.querySelector(`#item-${item.index}`).remove();
-        showNotification('Download completed', 'success', 2000);
+        state.videos.splice(item.index, 1);
       })
       .catch((err) => {
         showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
       });
   }
-
-  state.videos = [];
+  // for (const item of state.videos) {
+  //   const title = stringFormat(item.videoDetails.title);
+  //   await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
+  //     quality: 'highestaudio',
+  //   })
+  //     .then(() => {
+  //       document.querySelector(`#item-${item.index}`).remove();
+  //       state.videos.splice(item.index, 1);
+  //       // showNotification('Download completed', 'success', 2000);
+  //     })
+  //     .catch((err) => {
+  //       showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
+  //     });
+  // }
+  // state.videos = [];
 };
 
 const stringFormat = (value) => {
-  const formattedString = value.replace(/(\:|\.)/gi, '').replace(/(\||\,\s)/gi, '-');
+  const formattedString = value.replace(/(\:|\.|\?)/gi, '').replace(/(\||\,\s)/gi, '-');
   return formattedString;
 };
 
