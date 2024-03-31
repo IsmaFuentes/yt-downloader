@@ -68,27 +68,12 @@ const downloadQueuedVideos = async (donwloadPath) => {
     })
       .then(() => {
         document.querySelector(`#item-${item.index}`).remove();
-        state.videos.splice(item.index, 1);
+        state.videos.splice(0, 1);
       })
       .catch((err) => {
         showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
       });
   }
-  // for (const item of state.videos) {
-  //   const title = stringFormat(item.videoDetails.title);
-  //   await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
-  //     quality: 'highestaudio',
-  //   })
-  //     .then(() => {
-  //       document.querySelector(`#item-${item.index}`).remove();
-  //       state.videos.splice(item.index, 1);
-  //       // showNotification('Download completed', 'success', 2000);
-  //     })
-  //     .catch((err) => {
-  //       showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
-  //     });
-  // }
-  // state.videos = [];
 };
 
 const stringFormat = (value) => {
@@ -107,3 +92,19 @@ const showNotification = (message, notificationType, delayMs) => {
     notificationWrapper.style.opacity = '0';
   }, delayMs);
 };
+
+// for (const item of state.videos) {
+//   const title = stringFormat(item.videoDetails.title);
+//   await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
+//     quality: 'highestaudio',
+//   })
+//     .then(() => {
+//       document.querySelector(`#item-${item.index}`).remove();
+//       state.videos.splice(item.index, 1);
+//       // showNotification('Download completed', 'success', 2000);
+//     })
+//     .catch((err) => {
+//       showNotification(err ? err.message : 'Something bad happened', 'danger', 2000);
+//     });
+// }
+// state.videos = [];
