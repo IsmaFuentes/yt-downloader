@@ -65,6 +65,7 @@ const downloadQueuedVideos = async (donwloadPath) => {
     const title = stringFormat(item.videoDetails.title);
     await YouTubeDownloader.downloadFromInfo(item, `${donwloadPath}\\${title}.mp3`, {
       quality: 'highestaudio',
+      filter: 'audioonly',
     })
       .then(() => {
         document.querySelector(`#item-${item.index}`).remove();
