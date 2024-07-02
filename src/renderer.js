@@ -78,7 +78,7 @@ const downloadQueuedVideos = async (donwloadPath) => {
 };
 
 const stringFormat = (value) => {
-  const formattedString = value.replace(/(\:|\.|\?)/gi, '').replace(/(\||\,\s)/gi, '-');
+  const formattedString = value.replace(/(\:|\.|\?|\"|\')/gi, '').replace(/(\||\,\s)/gi, '-');
   return formattedString;
 };
 
