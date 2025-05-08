@@ -14,7 +14,7 @@
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
-    "@distube/ytdl-core": "^4.14.4",
+    "@distube/ytdl-core": "^4.16.10",
     "ytdl-core": "^4.11.5"
   }
 }
