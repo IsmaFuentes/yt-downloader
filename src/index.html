@@ -2,12 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self';img-src *"
-    />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';img-src *" />
     <link rel="stylesheet" href="winui.css" />
-    <link rel="stylesheet" href="material-icons/iconfont/material-icons.css" />
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <title>YT Downloader</title>
   </head>
   <body>
@@ -17,7 +14,7 @@
         <div class="form-field-group">
           <input type="text" class="form-field" id="url-selector" />
           <button class="form-button" id="add-url-btn">
-            <span class="material-icons-outlined">add_box</span>
+            <span class="fa-solid fa-plus" />
           </button>
         </div>
       </div>
@@ -28,10 +25,10 @@
     </section>
     <footer>
       <button id="download-btn">
-        <span class="material-icons-outlined">cloud_download</span>
+        <span class="fa-solid fa-download" />
       </button>
       <button id="clear-cache-btn">
-        <span class="material-icons-outlined">restart_alt</span>
+        <span class="fa-solid fa-arrow-rotate-right" />
       </button>
     </footer>
     <script src="renderer.js"></script>

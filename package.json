@@ -10,11 +10,11 @@
   "author": "Ismael Fuentes Sintes",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^27.0.2",
+    "electron": "^39.2.4",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
-    "@distube/ytdl-core": "^4.16.10",
-    "ytdl-core": "^4.11.5"
+    "@distube/ytdl-core": "^4.16.12",
+    "@fortawesome/fontawesome-free": "^7.1.0"
   }
 }

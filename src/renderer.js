@@ -25,7 +25,7 @@ document.querySelector('#add-url-btn').addEventListener('click', (event) => {
           <p>${videoDetails.title}</p>
       </div>
       <button class="yt-item-remove-btn" id="btn-remove-${item.index}">
-        <span class="material-icons-outlined">delete</span>
+        <span class="fa-solid fa-delete-left"/>
       </button>
     `;
       document.querySelector('#app-body').appendChild(element);
