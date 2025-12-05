@@ -14,7 +14,8 @@
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
-    "@distube/ytdl-core": "^4.16.12",
-    "@fortawesome/fontawesome-free": "^7.1.0"
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "python-shell": "^5.0.0",
+    "youtubei.js": "^16.0.1"
   }
 }
